@@ -1,4 +1,11 @@
-# Snake Game AI 
+# Development
+```sh
+virtualenv env --python=3.10
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+# Snake Game AI
 AI driven snake game using Reinforcement Learning and Deep Q Learning.<br>
 
 The game of Snake actually has a trivial, unbeatable solution. It can be driven by <b> Simple Non-ML Technique </b>by just traversing every block of the board, this gives the unbeateablre solution but it is very time taking and very brute force approach.<br>
@@ -10,14 +17,14 @@ In Reinforcement Learning, we have two main components: the <b>environment</b> (
 <p align="center">
 <img src="https://github.com/vedantgoswami/SnakeGameAI/blob/main/Images/structure.svg" height="380px" width="480px">
   </p>
-Deep Reinforcement Learning (DRL) combines the above ideas of RL with deep neural networks. The neural network learns the “Q function”, which takes as input the current environment state and outputs a vector containing expected rewards for each possible action. The agent can then pick the action that maximizes the Q function. Based on this action, the game then updates the environment to a new state and assigns a reward (e.g. +10 for eating an apple, -10 for hitting a wall). At the beginning of training, the Q function is just approximated by a randomly initialized neural network. 
+Deep Reinforcement Learning (DRL) combines the above ideas of RL with deep neural networks. The neural network learns the “Q function”, which takes as input the current environment state and outputs a vector containing expected rewards for each possible action. The agent can then pick the action that maximizes the Q function. Based on this action, the game then updates the environment to a new state and assigns a reward (e.g. +10 for eating an apple, -10 for hitting a wall). At the beginning of training, the Q function is just approximated by a randomly initialized neural network.
 
 I will explain the implementation of this SnakeAI step by step.<br>
-A simple snake board game which is user controlled is designed using pygame module is here https://github.com/vedantgoswami/SnakeGameAI/blob/main/snake_game.py 
+A simple snake board game which is user controlled is designed using pygame module is here https://github.com/vedantgoswami/SnakeGameAI/blob/main/snake_game.py
 
 ### Algorithm
 We have snake and food on the board randomly placed.
-* calculate the state of the snake using the 11 values 
+* calculate the state of the snake using the 11 values
   <img src="https://github.com/vedantgoswami/SnakeGameAI/blob/main/Images/State.svg">
 * Now this current state is passed to the RL Model for the next state.
   <img src="https://github.com/vedantgoswami/SnakeGameAI/blob/main/Images/Model.svg">

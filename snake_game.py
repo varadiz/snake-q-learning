@@ -5,7 +5,7 @@ from collections import namedtuple
 pygame.init()
 font = pygame.font.Font('arial.ttf',25)
 
-# Reset 
+# Reset
 # Reward
 # Play(action) -> Direction
 # Game_Iteration
@@ -17,7 +17,7 @@ class Direction(Enum):
     LEFT = 2
     UP = 3
     DOWN = 4
- 
+
 Point = namedtuple('Point','x , y')
 
 BLOCK_SIZE=20
@@ -36,7 +36,7 @@ class SnakeGame:
         self.display = pygame.display.set_mode((self.w,self.h))
         pygame.display.set_caption('Snake')
         self.clock = pygame.time.Clock()
-        
+
         #init game state
         self.direction = Direction.RIGHT
         self.head = Point(self.w/2,self.h/2)
@@ -75,7 +75,7 @@ class SnakeGame:
         self.snake.insert(0,self.head)
 
         # 3. Check if game Over
-        game_over = False 
+        game_over = False
         if(self._is_collision()):
             game_over=True
             return game_over,self.score
@@ -89,7 +89,7 @@ class SnakeGame:
         self._update_ui()
         self.clock.tick(SPEED)
         # 6. Return game Over and Display Score
-        
+
         return game_over,self.score
 
     def _update_ui(self):

@@ -7,7 +7,7 @@ import math
 pygame.init()
 font = pygame.font.Font('arial.ttf',25)
 
-# Reset 
+# Reset
 # Reward
 # Play(action) -> Direction
 # Game_Iteration
@@ -19,7 +19,7 @@ class Direction(Enum):
     LEFT = 2
     UP = 3
     DOWN = 4
- 
+
 Point = namedtuple('Point','x , y')
 
 BLOCK_SIZE=20
@@ -38,7 +38,7 @@ class SnakeGameAI:
         self.display = pygame.display.set_mode((self.w,self.h))
         pygame.display.set_caption('Snake')
         self.clock = pygame.time.Clock()
-        
+
         #init game state
         self.reset()
     def reset(self):
@@ -51,7 +51,7 @@ class SnakeGameAI:
         self.food = None
         self._place__food()
         self.frame_iteration = 0
-      
+
 
     def _place__food(self):
         x = random.randint(0,(self.w-BLOCK_SIZE)//BLOCK_SIZE)*BLOCK_SIZE
@@ -68,14 +68,14 @@ class SnakeGameAI:
             if(event.type == pygame.QUIT):
                 pygame.quit()
                 quit()
-            
+
         # 2. Move
         self._move(action)
         self.snake.insert(0,self.head)
 
         # 3. Check if game Over
         reward = 0  # eat food: +10 , game over: -10 , else: 0
-        game_over = False 
+        game_over = False
         if(self.is_collision() or self.frame_iteration > 100*len(self.snake) ):
             game_over=True
             reward = -10
@@ -85,15 +85,15 @@ class SnakeGameAI:
             self.score+=1
             reward=10
             self._place__food()
-            
+
         else:
             self.snake.pop()
-        
+
         # 5. Update UI and clock
         self._update_ui()
         self.clock.tick(SPEED)
         # 6. Return game Over and Display Score
-        
+
         return reward,game_over,self.score
 
     def _update_ui(self):
@@ -109,7 +109,7 @@ class SnakeGameAI:
     def _move(self,action):
         # Action
         # [1,0,0] -> Straight
-        # [0,1,0] -> Right Turn 
+        # [0,1,0] -> Right Turn
         # [0,0,1] -> Left Turn
 
         clock_wise = [Direction.RIGHT,Direction.DOWN,Direction.LEFT,Direction.UP]

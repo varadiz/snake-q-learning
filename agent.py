@@ -1,5 +1,5 @@
-import torch 
-import random 
+import torch
+import random
 import numpy as np
 from collections import deque
 from snake_gameai import SnakeGameAI,Direction,Point,BLOCK_SIZE
@@ -15,21 +15,21 @@ class Agent:
         self.epsilon = 0 # Randomness
         self.gamma = 0.9 # discount rate
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
-        self.model = Linear_QNet(11,256,3) 
+        self.model = Linear_QNet(11,256,3)
         self.trainer = QTrainer(self.model,lr=LR,gamma=self.gamma)
         # for n,p in self.model.named_parameters():
-        #     print(p.device,'',n) 
-        # self.model.to('cuda')   
+        #     print(p.device,'',n)
+        # self.model.to('cuda')
         # for n,p in self.model.named_parameters():
-        #     print(p.device,'',n)         
+        #     print(p.device,'',n)
         # TODO: model,trainer
 
     # state (11 Values)
     #[ danger straight, danger right, danger left,
-    #   
+    #
     # direction left, direction right,
     # direction up, direction down
-    # 
+    #
     # food left,food right,
     # food up, food down]
     def get_state(self,game):
@@ -100,9 +100,9 @@ class Agent:
             final_move[move]=1
         else:
             state0 = torch.tensor(state,dtype=torch.float).cuda()
-            prediction = self.model(state0).cuda() # prediction by model 
+            prediction = self.model(state0).cuda() # prediction by model
             move = torch.argmax(prediction).item()
-            final_move[move]=1 
+            final_move[move]=1
         return final_move
 
 def train():
@@ -134,11 +134,11 @@ def train():
             game.reset()
             agent.n_game += 1
             agent.train_long_memory()
-            if(score > reward): # new High score 
+            if(score > reward): # new High score
                 reward = score
                 agent.model.save()
             print('Game:',agent.n_game,'Score:',score,'Record:',record)
-            
+
             plot_scores.append(score)
             total_score+=score
             mean_score = total_score / agent.n_game
